@@ -3,131 +3,244 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anuncio Importante: Estudio Bíblico</title>
+    <title>Página de Anuncios</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh; /* Ensures it takes full height of viewport */
-            box-sizing: border-box; /* Include padding in element's total width and height */
+        :root {
+            --primary-color: #1a4a75; /* Dark blue */
+            --secondary-color: #2c6da7; /* Medium blue */
+            --accent-color: #e67e22; /* Orange for highlights */
+            --text-color: #333;
+            --background-color: #f4f4f4;
+            --card-background: #ffffff;
+            --border-color: #e0e0e0;
         }
 
-        .announcement-container {
-            background-color: #ffffff;
+        body {
+            font-family: 'Open Sans', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.8em;
+            letter-spacing: 1px;
+        }
+
+        /* Announcement Grid */
+        .announcement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        /* Individual Announcement Card */
+        .announcement-card {
+            background-color: var(--card-background);
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            max-width: 700px;
-            width: 100%;
-            text-align: left;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        h1 {
-            color: #1a4a75; /* Dark blue for a professional look */
+        .announcement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .announcement-card h2 {
+            color: var(--primary-color);
+            font-family: 'Montserrat', sans-serif;
             text-align: center;
-            margin-bottom: 25px;
-            font-size: 2em;
-            border-bottom: 2px solid #e0e0e0;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            border-bottom: 2px solid var(--border-color);
             padding-bottom: 15px;
         }
 
-        h2 {
-            color: #2c6da7; /* Slightly lighter blue */
+        .announcement-card h3 {
+            color: var(--secondary-color);
             margin-top: 25px;
             margin-bottom: 15px;
-            font-size: 1.5em;
+            font-size: 1.4em;
         }
 
-        p {
+        .announcement-card p {
             margin-bottom: 15px;
             font-size: 1.05em;
         }
 
-        ul {
-            list-style-type: none; /* Remove default bullet points */
+        .announcement-card ul {
+            list-style-type: none;
             padding-left: 0;
             margin-bottom: 20px;
         }
 
-        ul li {
+        .announcement-card ul li {
             position: relative;
             padding-left: 25px;
             margin-bottom: 10px;
             font-size: 1.05em;
         }
 
-        ul li:before {
-            content: '•'; /* Custom bullet point */
-            color: #2c6da7; /* Bullet color */
+        .announcement-card ul li:before {
+            content: '•';
+            color: var(--secondary-color);
             font-size: 1.2em;
             position: absolute;
             left: 0;
             top: 0;
         }
 
-        ul.questions li:before {
-            content: '➤'; /* Custom bullet for questions */
-            color: #1a4a75;
+        .announcement-card ul.questions li:before {
+            content: '➤';
+            color: var(--primary-color);
         }
 
-        strong {
-            color: #1a4a75; /* Emphasize bold text with dark blue */
+        .announcement-card strong {
+            color: var(--accent-color); /* Highlight important text */
         }
 
         /* Responsive adjustments */
-        @media (max-width: 600px) {
-            body {
-                padding: 10px;
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2em;
             }
-            .announcement-container {
-                padding: 20px;
+
+            .announcement-card {
+                padding: 25px;
             }
-            h1 {
-                font-size: 1.7em;
-                margin-bottom: 20px;
+
+            .announcement-card h2 {
+                font-size: 1.5em;
             }
-            h2 {
-                font-size: 1.3em;
+
+            .announcement-card h3 {
+                font-size: 1.2em;
             }
-            p, ul li {
+
+            .announcement-card p,
+            .announcement-card ul li {
                 font-size: 0.95em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 15px 0;
+            }
+
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .announcement-grid {
+                gap: 15px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="announcement-container">
-        <h1>Análisis del libro *Lecciones que aprendo de la Biblia*</h1>
+    <header>
+        <h1>Tablón de Anuncios Importantes</h1>
+    </header>
 
-        <p>A partir de la semana del <strong>14 de julio de 2025</strong>, el Estudio bíblico de la congregación analizará el libro <em>Lecciones que aprendo de la Biblia</em>.</p>
+    <div class="container">
+        <div class="announcement-grid">
+            <div class="announcement-card">
+                <h2>Análisis del libro *Lecciones que aprendo de la Biblia*</h2>
+                <p>A partir de la semana del <strong>14 de julio de 2025</strong>, el Estudio bíblico de la congregación analizará el libro <em>Lecciones que aprendo de la Biblia</em>.</p>
 
-        <h2>Este estudio nos ayudará a lograr lo siguiente:</h2>
-        <ul>
-            <li><strong>Obtener una visión general sencilla</strong> del mensaje de la Biblia.</li>
-            <li><strong>Extraer lecciones de personajes bíblicos</strong>, tanto de los que fueron obedientes a Jehová como de los que no.</li>
-            <li><strong>Aplicar las lecciones aprendidas</strong> en nuestra vida.</li>
-        </ul>
+                <h3>Este estudio nos ayudará a lograr lo siguiente:</h3>
+                <ul>
+                    <li><strong>Obtener una visión general sencilla</strong> del mensaje de la Biblia.</li>
+                    <li><strong>Extraer lecciones de personajes bíblicos</strong>, tanto de los que fueron obedientes a Jehová como de los que no.</li>
+                    <li><strong>Aplicar las lecciones aprendidas</strong> en nuestra vida.</li>
+                </ul>
 
-        <h2>Preparación Semanal</h2>
-        <p>Para aprovechar al máximo cada sesión, les animamos a prepararse cuidadosamente todas las semanas:</p>
-        <ul>
-            <li><strong>Lean cada lección.</strong></li>
-            <li><strong>Respondan las preguntas</strong> que se encuentran al final de cada lección.</li>
-            <li><strong>Busquen los pasajes de la Biblia</strong> en los que se basa la información.</li>
-        </ul>
+                <h3>Preparación Semanal</h3>
+                <p>Para aprovechar al máximo cada sesión, les animamos a prepararse cuidadosamente todas las semanas:</p>
+                <ul>
+                    <li><strong>Lean cada lección.</strong></li>
+                    <li><strong>Respondan las preguntas</strong> que se encuentran al final de cada lección.</li>
+                    <li><strong>Busquen los pasajes de la Biblia</strong> en los que se basa la información.</li>
+                </ul>
 
-        <p>Además de las preguntas que aparecen al final de cada lección, el director del estudio planteará dos preguntas adicionales clave:</p>
-        <ul class="questions">
-            <li>“¿Qué nos enseña este relato acerca de Jehová?”</li>
-            <li>“¿Qué lecciones prácticas podemos aprender de este relato?”</li>
-        </ul>
+                <p>Además de las preguntas que aparecen al final de cada lección, el director del estudio planteará dos preguntas adicionales clave:</p>
+                <ul class="questions">
+                    <li>“¿Qué nos enseña este relato acerca de Jehová?”</li>
+                    <li>“¿Qué lecciones prácticas podemos aprender de este relato?”</li>
+                </ul>
+            </div>
+
+            <div class="announcement-card">
+                <h2>¡Gran Evento Comunitario!</h2>
+                <p>¡No te pierdas nuestro próximo <strong>Evento Comunitario de Verano</strong> el <strong>20 de agosto de 2025</strong> en el Parque Central! Habrá actividades para todas las edades, música en vivo y comida.</p>
+                <h3>Actividades destacadas:</h3>
+                <ul>
+                    <li>Juegos y concursos para niños.</li>
+                    <li>Presentaciones musicales locales.</li>
+                    <li>Stands de comida y bebida.</li>
+                    <li>Feria de artesanías.</li>
+                </ul>
+                <p>¡Te esperamos para pasar un día inolvidable en familia!</p>
+            </div>
+
+            <div class="announcement-card">
+                <h2>Oportunidad de Voluntariado</h2>
+                <p>Estamos buscando voluntarios entusiastas para nuestra campaña de limpieza de playas el <strong>5 de septiembre de 2025</strong>. ¡Tu ayuda es invaluable para mantener nuestras costas limpias!</p>
+                <h3>Detalles del voluntariado:</h3>
+                <ul>
+                    <li>Punto de encuentro: Playa Boca Chica (entrada principal).</li>
+                    <li>Hora: 9:00 AM - 1:00 PM.</li>
+                    <li>Qué traer: Gorra, protector solar, botella de agua reutilizable.</li>
+                    <li>Se proporcionarán guantes y bolsas de basura.</li>
+                </ul>
+                <p>Para inscribirte o para más información, por favor contacta a María Rodríguez al <strong>809-555-1234</strong>.</p>
+            </div>
+
+            <div class="announcement-card">
+                <h2>Cierre Temporal de Biblioteca</h2>
+                <p>La biblioteca municipal estará <strong>cerrada por mantenimiento</strong> desde el <strong>1 de octubre de 2025 hasta el 15 de octubre de 2025</strong>. Disculpen las molestias que esto pueda ocasionar.</p>
+                <h3>Servicios afectados:</h3>
+                <ul>
+                    <li>Préstamo y devolución de libros.</li>
+                    <li>Acceso a salas de lectura.</li>
+                    <li>Uso de computadoras públicas.</li>
+                </ul>
+                <p>¡Esperamos verlos de nuevo a partir del 16 de octubre!</p>
+            </div>
+        </div>
     </div>
 </body>
 </html>

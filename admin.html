@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrar Anuncios</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a4a75;
+            --secondary-color: #2c6da7;
+            --accent-color: #e67e22;
+            --text-color: #333;
+            --background-color: #f4f4f4;
+            --card-background: #ffffff;
+            --border-color: #e0e0e0;
+            --danger-color: #e74c3c; /* For delete buttons */
+        }
+
+        body {
+            font-family: 'Open Sans', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5em;
+        }
+
+        .admin-section {
+            background-color: var(--card-background);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+
+        .admin-section h2 {
+            color: var(--primary-color);
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-size: 2em;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 15px;
+            text-align: center;
+        }
+
+        /* Form Styles */
+        .add-announcement-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+
+        .add-announcement-form input[type="text"],
+        .add-announcement-form textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 1em;
+            box-sizing: border-box; /* Include padding in element's total width */
+        }
+
+        .add-announcement-form textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .add-announcement-form button {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: block;
+            width: 100%;
+        }
+
+        .add-announcement-form button:hover {
+            background-color: #d16e1e;
+        }
+
+        /* Announcement List Styles */
+        #announcements-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        #announcements-list li {
+            background-color: #fdfdfd;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            margin-bottom: 15px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        #announcements-list li div {
+            flex-grow: 1;
+        }
+
+        #announcements-list li h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        #announcements-list li p {
+            font-size: 0.95em;
+            color: #555;
+            margin-bottom: 0;
+        }
+
+        #announcements-list li button {
+            background-color: var(--danger-color);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin-left: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        #announcements-list li button:hover {
+            background-color: #c0392b;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+            .admin-section {
+                padding: 20px;
+            }
+            .admin-section h2 {
+                font-size: 1.8em;
+            }
+            .add-announcement-form button {
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+            #announcements-list li {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            #announcements-list li button {
+                margin-top: 15px;
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Panel de Administración de Anuncios</h1>
+    </header>
+
+    <div class="container">
+        <div class="admin-section">
+            <h2>Agregar Nuevo Anuncio</h2>
+            <form id="add-announcement-form" class="add-announcement-form">
+                <label for="announcement-title">Título del Anuncio:</label>
+                <input type="text" id="announcement-title" required>
+
+                <label for="announcement-content">Contenido del Anuncio:</label>
+                <textarea id="announcement-content" rows="6" required></textarea>
+
+                <button type="submit">Añadir Anuncio</button>
+            </form>
+        </div>
+
+        <div class="admin-section">
+            <h2>Anuncios Existentes</h2>
+            <ul id="announcements-list">
+                </ul>
+        </div>
+    </div>
+
+    <script>
+        // JS para admin.html (Gestionar anuncios)
+        document.addEventListener('DOMContentLoaded', () => {
+            const addAnnouncementForm = document.getElementById('add-announcement-form');
+            const announcementTitleInput = document.getElementById('announcement-title');
+            const announcementContentInput = document.getElementById('announcement-content');
+            const announcementsList = document.getElementById('announcements-list');
+
+            let announcements = JSON.parse(localStorage.getItem('announcements')) || [];
+
+            function saveAnnouncements() {
+                localStorage.setItem('announcements', JSON.stringify(announcements));
+            }
+
+            function renderAnnouncements() {
+                announcementsList.innerHTML = ''; // Clear existing list
+                announcements.forEach((announcement, index) => {
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `
+                        <div>
+                            <h3>${announcement.title}</h3>
+                            <p>${announcement.content.replace(/\n/g, '<br>')}</p>
+                        </div>
+                        <button data-index="${index}">Eliminar</button>
+                    `;
+                    announcementsList.appendChild(listItem);
+                });
+            }
+
+            // Add Announcement
+            addAnnouncementForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const title = announcementTitleInput.value.trim();
+                const content = announcementContentInput.value.trim();
+
+                if (title && content) {
+                    announcements.push({ title, content });
+                    saveAnnouncements();
+                    renderAnnouncements();
+                    announcementTitleInput.value = '';
+                    announcementContentInput.value = '';
+                } else {
+                    alert('Por favor, completa ambos campos del anuncio.');
+                }
+            });
+
+            // Remove Announcement
+            announcementsList.addEventListener('click', (e) => {
+                if (e.target.tagName === 'BUTTON' && e.target.textContent === 'Eliminar') {
+                    const indexToRemove = e.target.dataset.index;
+                    if (confirm('¿Estás seguro de que quieres eliminar este anuncio?')) {
+                        announcements.splice(indexToRemove, 1);
+                        saveAnnouncements();
+                        renderAnnouncements();
+                    }
+                }
+            });
+
+            // Initial render
+            renderAnnouncements();
+        });
+    </script>
+</body>
+</html>
